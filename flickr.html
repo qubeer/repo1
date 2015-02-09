@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Flickr JSON</title>
+  </head>
+<body>
+  <script>
+  function jsonFlickrApi(rsp) {
+    window.rsp = rsp;
+    var s = "";
+    // http://farm{id}.static.flickr.com/{server-id}/{id}_{secret}_[mstb].jpg
+    // http://www.flickr.com/photos/{user-id}/{photo-id}
+    s = "total number is: " + rsp.photos.photo.length + "<br/>";
+    
+    for (var i=0; i < rsp.photos.photo.length; i++) {
+      photo = rsp.photos.photo[i];
+      t_url = "http://farm" + photo.farm + ".static.flickr.com/" + 
+        photo.server + "/" + photo.id + "_" + photo.secret + "_" + "t.jpg";
+      p_url = "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
+      s +=  '<a href="' + p_url + '">' + '<img alt="'+ photo.title + 
+        '"src="' + t_url + '"/>' + '</a>';
+    }
+    document.writeln(s);
+  }
+  </script>
+
+</body>
+<script type="text/javascript" src="https://api.flickr.com/services/rest/?format=json&amp;method=flickr.photos.search&amp;user_id=58123159@N05&amp;api_key=cfccbb943ddbcbd86c6a91c6365c64ed&amp;media=photos&amp;per_page=6&amp;privacy_filter=1"></script>
+    <script type="text/javascript" src="https://api.flickr.com/services/rest/?format=json&amp;method=flickr.photos.search&amp;group_id=58123159@N05&amp;api_key=cfccbb943ddbcbd86c6a91c6365c64ed&amp;media=photos&amp;per_page=6&amp;privacy_filter=1"></script>
+</html>
